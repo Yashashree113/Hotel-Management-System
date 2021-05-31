@@ -6,22 +6,24 @@ var ObjectId=require('mongoose').Types.ObjectId
 
 var Rooms=require('./model/rooms')
 
-//=> localhost:8000/rooms
+mongoose.connect('mongodb+srv://room:EK709XD6rjXFuznt@cluster0.fxdvc.mongodb.net/roomdata?retryWrites=true&w=majority',
+{useNewUrlParser: true}, (err)=>{
+    if(!err) {
+        console.log('MongoDB connected successfully')
+    }
+    else{console.log('Error in DB connection: '+err)}
+})
+
+//=> localhost:4000/rooms
 router.get('/',(req,res)=>{
     Rooms.find((err,docs)=>{
-        if(!err){res.send(docs);}
+        if(!err){res.send(docs);
+        }
         else{console.log('Error in retriving Rooms:'+JSON.stringify(err, undefined, 2));}
     });
 })
-router.get('/:id',(req,res)=>{
-   if(!ObjectId.isValid(req.params.id))
-   return res.status(400).send('No record with given id: ${req.params.id}')
-   Rooms.findById(req.params.id,(err,doc)=>{
-    if(!err){res.send(doc);}
-    else{console.log('Error in retriving Rooms:'+JSON.stringify(err, undefined, 2));}
-   })
-})
 
+//Adding new room details
 router.post('/room',(req,res)=>{
         var newRoom = {
             room_no: req.body.room_no,
@@ -59,7 +61,7 @@ router.get("/room", (req, res) => {
 });
 
 // list room details by id 
-router.get('/staff/:id',(req,res)=>{
+router.get('/room/:id',(req,res)=>{
     if(!ObjectId.isValid(req.params.id))
     return res.status(400).send('No record with given id: ${req.params.id}')
     
