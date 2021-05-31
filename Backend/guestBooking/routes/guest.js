@@ -2,10 +2,17 @@
 const express = require("express");
 const mongoose=require('mongoose')
 const router = express.Router();
-
 var ObjectId=require('mongoose').Types.ObjectId
 
 var Guest=require('../model/guestBooking')
+
+mongoose.connect('mongodb+srv://guest:EK709XD6rjXFuznt@cluster0.fxdvc.mongodb.net/guestdata?retryWrites=true&w=majority',
+{useNewUrlParser: true}, (err)=>{
+    if(!err) {
+        console.log('MongoDB connected successfully')
+    }
+    else{console.log('Error in DB connection: '+err)}
+})
 
 //=> localhost:4000/guest
 router.get('/',(req,res)=>{
