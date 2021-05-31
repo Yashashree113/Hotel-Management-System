@@ -1,0 +1,7 @@
+{
+    "env":{
+        "JWT_KEY_ADMIN": "adminsecret",
+        "JWT_KEY_MANAGER":"managersecret",
+        "JWT_KEY_RECEPTIONIST":"recptionistsecret"
+    }
+}
