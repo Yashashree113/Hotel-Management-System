@@ -6,7 +6,7 @@ var ObjectId=require('mongoose').Types.ObjectId
 
 var Rooms=require('./model/rooms')
 
-mongoose.connect('mongodb+srv://room:EK709XD6rjXFuznt@cluster0.fxdvc.mongodb.net/roomdata?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://room:kPeuIN8bYWblCFs7@cluster0.fxdvc.mongodb.net/roomdata?retryWrites=true&w=majority',
 {useNewUrlParser: true}, (err)=>{
     if(!err) {
         console.log('MongoDB connected successfully')
@@ -27,7 +27,6 @@ router.get('/',(req,res)=>{
 router.post('/room',(req,res)=>{
         var newRoom = {
             room_no: req.body.room_no,
-            floor: req.body.floor,
             room_type: req.body.room_type,
             bed_type: req.body.bed_type,
             no_of_bed:req.body.no_of_bed,
@@ -78,11 +77,10 @@ router.put('/:id',(req,res)=>{
     return res.status(400).send('No record with given id: ${req.params.id}')
     var room={
             room_no: req.body.room_no,
-            floor: req.body.floor,
             room_type: req.body.room_type,
             bed_type: req.body.bed_type,
             no_of_bed:req.body.no_of_bed,
-            bathrooms: req.body.bathrooms,
+            AC: req.body.AC,
             price: req.body.price,
             availability: req.body.availability
     }
