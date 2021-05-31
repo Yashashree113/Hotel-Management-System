@@ -15,8 +15,8 @@ var roomsSchema= new mongoose.Schema({
     no_of_bed:{
         type:Number
     },
-    bathrooms:{
-        type:Number
+    AC:{
+        type:String
     },
     price:{
         type:Number,
