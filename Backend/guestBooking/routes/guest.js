@@ -5,9 +5,9 @@ const router = express.Router();
 
 var ObjectId=require('mongoose').Types.ObjectId
 
-var Guest=require('../model/guest')
+var Guest=require('../model/guestBooking')
 
-//=> localhost:8000/guest
+//=> localhost:4000/guest
 router.get('/',(req,res)=>{
     Staff.find((err,docs)=>{
         if(!err){res.send(docs);

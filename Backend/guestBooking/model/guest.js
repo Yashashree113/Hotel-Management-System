@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-var guestSchema= new mongoose.Schema({
+var guestbookingSchema= new mongoose.Schema({
     Code:{
         type:Number,
         required:'This field is required'
@@ -11,6 +11,7 @@ var guestSchema= new mongoose.Schema({
     },
     phone_no:{
         type:Number,
+        required:'This field is required'
     },
     email:{
         type: String
@@ -28,12 +29,27 @@ var guestSchema= new mongoose.Schema({
     },
     company:{
         type:String
+    },
+    room:{
+        type:Number
+    },
+    checkin:{
+        type:Date
+    },
+    checkout:{
+        type:Date
+    },
+    paymentmode:{
+        type:String
+    },
+    totalamount:{
+        type:Number
     }
 })
 
-guestSchema.path('email').validate((val)=>{
+guestbookingSchema.path('email').validate((val)=>{
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(val).toLowerCase());
 }, 'Invalid e-mail')
 
-module.exports=mongoose.model('guest',guestSchema)
+module.exports=mongoose.model('guest',guestbookingSchema)
