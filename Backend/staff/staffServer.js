@@ -1,19 +1,20 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const cors = require("cors");
-
 const port = 8081;
+const staff= express();
+require("dotenv/config");
 
-const app = express();
-app.use(cors());
+staff.use(morgan("dev"));
+staff.use(express.json());
+staff.use(express.urlencoded({ extended: false }));
+staff.use(cors());
 //Creates an instance of a single Route for the given path
 const Staff = require("./routes/staff");
 
-app.use(bodyParser.json());
+staff.use("/staff", Staff);
 
-app.use("/staff", Staff);
-
-app.listen(port, function () {
+staff.listen(port, function () {
 	console.log("Staff server running on localhost:" + port);
 });
 

@@ -1,5 +1,4 @@
 const express=require('express')
-var app=express()
 const router = express.Router();
 var ObjectId=require('mongoose').Types.ObjectId
 const mongoose=require('mongoose')
