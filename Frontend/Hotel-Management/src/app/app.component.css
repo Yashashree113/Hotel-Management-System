@@ -1,0 +1,13 @@
+.navbar
+{
+    background-color: white;
+}
+.navbar-light .navbar-nav .navbar-link
+{
+    color: black;
+    font-size: 16px;
+}
+.navbar-light .navbar-nav .navbar-link:hover
+{
+   text-decoration:underline;
+}

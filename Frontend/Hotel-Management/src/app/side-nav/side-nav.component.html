@@ -1,0 +1,43 @@
+<img class="img-fluid bg-primary shodow-sm Logo" [routerLink]="['']" src="assets/icon/Logo.png" alt="">
+
+<mat-nav-list dense class="mt-2">
+    <mat-divider class="mt-1"></mat-divider>
+
+    <a mat-list-item [routerLink]="['booking']" href="">
+        <div class="d-flex flex-row align-items-center"><img class="icon-booking" src="assets/icon/booking.png" alt="">
+            <span mat-line>
+                <span class="mat-h4">Booking</span>
+            </span>
+        </div>
+    </a>
+    <mat-divider class="mt-1"></mat-divider>
+
+
+    <a mat-list-item [matMenuTriggerFor]="menu">
+        <div class="d-flex flex-row align-items-center"><img class="icon-booking" src="assets/icon/note.png" alt="">
+            <span mat-line><span class="mat-h4">Service</span></span>
+        </div>
+    </a>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Service</button>
+        <button mat-menu-item [routerLink]="['serve/agreement']">Aggrement</button>
+        <button mat-menu-item [routerLink]="['serve/report']">Report</button>
+        <button mat-menu-item [routerLink]="['serve/checkout']">Checkout</button>
+    </mat-menu>
+    <mat-divider class="mt-1"></mat-divider>
+
+    <a mat-list-item href="" [routerLink]="['pay']">
+        <div class="d-flex flex-row align-items-center"><img class="icon" src="assets/icon/credit-card.png" alt="">
+            <span mat-line><span class="mat-h4">Pay</span></span>
+        </div>
+    </a>
+    <mat-divider class="mt-1"></mat-divider>
+
+    <a mat-list-item href="">
+        <div class="d-flex flex-row align-items-center"><img class="icon" src="assets/icon/info.png" alt="">
+            <span mat-line><span class="mat-h4">About</span></span>
+        </div>
+    </a>
+    <mat-divider class="mt-1"></mat-divider>
+
+</mat-nav-list>

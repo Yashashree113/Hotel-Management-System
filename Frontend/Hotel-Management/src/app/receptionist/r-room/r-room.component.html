@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="options">
+      <a  (click)="changePresentTab(0)">All Rooms</a>
+  </div>
+  div *ngIf="PresentTab === 0" class="tabs rooms">
+      <h2>View Rooms</h2>
+      <div *ngFor="let room of allRooms">
+          <div class="mdl-card">
+              <div class="mdl-card__title">
+              <p>Room Number:{{room.room_no}}</p> <br>
+              </div>
+              <div class="mdl-card__supporting-text">
+              <p>Room Type:{{room.room_type}}</p>
+              <p>Bed Type:{{room.bed_type}}</p>
+              <p>Price:{{room.price}}</p>
+              <p>Availability:{{room.availability}}</p>
+              </div>
+          </div>
+          <br>
+      </div>    
+  </div>

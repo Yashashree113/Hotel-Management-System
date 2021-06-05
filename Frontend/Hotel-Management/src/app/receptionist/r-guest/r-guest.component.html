@@ -1,0 +1,146 @@
+<div class="container">
+    <div class="options">
+        <a  (click)="changePresentTab(0)">View Guests</a>
+        <a (click)="changePresentTab(1)">Add Guests</a>
+        <a (click)="changePresentTab(2)">Edit Guests</a>
+    </div>
+    <div *ngIf="PresentTab === 0" class="tabs guests">
+        <h2>View Guests</h2>
+        <div *ngFor="let guest of allGuests">
+            <div class="mdl-card">
+                <div class="mdl-card__title">
+                <p>Code:{{guest.Code}}</p>
+                <p> Name:{{guest.guest_name}}</p>
+                <p>Phone No:{{guest.phone_no}}</p>
+                <p>Gender:{{guest.gender}}</p>
+                <p>Company:{{guest.company}}</p>
+                <p>Address:{{guest.address}}</p>
+                </div>
+                <div class="mdl-card__supporting-text">
+                <p>Email:{{guest.email}}</p>
+                <p>Age:{{guest.age}}</p>
+                <p>Room:{{guest.room}}</p>
+                <p>Adults:{{guest.adult}}</p>
+                <p>Children:{{guest.children}}</p>
+                <p>Check-in:{{guest.check-in}}</p>
+                <p>Check-out:{{guest.check-out}}</p>
+                </div>
+                <div class="mdl-card__actions">
+                  <button (click)="deleteGuests(guest.id)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                    Delete
+                  </button>
+                  <button (click)="editGuests(guest.id)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                    Edit
+                  </button>
+                </div>
+            </div>
+            <br>
+        </div>   
+    </div>
+    
+    <div *ngIf="PresentTab === 1" class="tabs addGuests">
+        <div class="container">
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h2 class="mdl-card__title-text">Add Guests</h2>
+                  </div>
+                <div class="mdl-card__supporting-text">
+                      <div class="form" [formGroup]="guestForm" >
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input formControlName="code" class="mdl-textfield__input" type="text" id="Code">
+                          <label class="mdl-textfield__label" for="code">Code</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input formControlName="guest_name" class="mdl-textfield__input" type="text" id="guest_name">
+                          <label class="mdl-textfield__label" for="guest_name"> Name</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input formControlName="age" class="mdl-textfield__input" type="text" id="age">
+                            <label class="mdl-textfield__label" for="age">Age</label>
+                          </div>
+                          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input formControlName="gender" class="mdl-textfield__input" type="text" id="gender">
+                            <label class="mdl-textfield__label" for="gender">Gender</label>
+                          </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input formControlName="company" class="mdl-textfield__input" type="text" id="company">
+                          <label class="mdl-textfield__label" for="company">Company </label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input formControlName="address" class="mdl-textfield__input" type="text" id="address">
+                            <label class="mdl-textfield__label" for="address">Address</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input formControlName="email" class="mdl-textfield__input" type="text" id="email">
+                          <label class="mdl-textfield__label" for="email">Email</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input formControlName="room" class="mdl-textfield__input" type="text" id="room">
+                            <label class="mdl-textfield__label" for="room">Room</label>
+                          </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input formControlName="adult" class="mdl-textfield__input" type="text" id="adult">
+                          <label class="mdl-textfield__label" for="adult">Adults</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input formControlName="children" class="mdl-textfield__input" type="text" id="children">
+                            <label class="mdl-textfield__label" for="children">Children</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input formControlName="check-in" class="mdl-textfield__input" type="text" id="check-in">
+                            <label class="mdl-textfield__label" for="check-in">Check-in</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input formControlName="check-out" class="mdl-textfield__input" type="text" id="check-out">
+                            <label class="mdl-textfield__label" for="check-out">Check-out</label>
+                        </div>
+                        
+
+                        <button (click)="addRoom()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                        Add Guests
+                        </button>
+                      </div>
+                </div>
+              </div>
+    
+        </div>
+        
+    </div>
+    <div *ngIf="PresentTab === 2" class="tabs editGuests">
+      <div class="mdl-card">
+        <div class="mdl-card__title editTitle">
+          <span>Edit Guests</span>
+          <span>Name {{PresentRoom.name}}</span>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <div class="form" [formGroup]="editForm" >
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input formControlName="occupation" class="mdl-textfield__input" type="text" id="occupation">
+              <label class="mdl-textfield__label" for="occupation">Occupation </label>
+            </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input formControlName="email" class="mdl-textfield__input" type="text" id="email">
+                <label class="mdl-textfield__label" for="email">Email</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input formControlName="salary" class="mdl-textfield__input" type="text" id="salary">
+                <label class="mdl-textfield__label" for="salary">Salary</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input formControlName="age" class="mdl-textfield__input" type="text" id="age">
+                <label class="mdl-textfield__label" for="age">Age</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input formControlName="employeeaddress" class="mdl-textfield__input" type="text" id="employeeaddress">
+                <label class="mdl-textfield__label" for="employeeaddress">Staff Address</label>
+            </div>
+          </div>
+        </div>
+        <div class="mdl-card__actions">
+          <button (click)="save()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+            Save 
+          </button>
+        </div>
+    </div>
+    </div>
+</div>

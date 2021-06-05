@@ -1,0 +1,225 @@
+<div class="container">
+    <div class="options">
+        <a  (click)="changePresentTab(0)">View Guests</a>
+        <a (click)="changePresentTab(1)">Add Guests</a>
+        <a (click)="changePresentTab(2)">Edit Guests</a>
+    </div>
+    <div *ngIf="PresentTab === 0" class="tabs guests">
+        <h2>View Guests</h2>
+        <div *ngFor="let guest of allGuests">
+            <div class="mdl-card">
+                <div class="mdl-card__title">
+                <p>Code:{{guest.Code}}</p>
+                <p> Name:{{guest.guest_name}}</p>
+                <p>Phone No:{{guest.phone_no}}</p>
+                <p>Gender:{{guest.gender}}</p>
+                <p>Company:{{guest.company}}</p>
+                <p>Address:{{guest.address}}</p>
+                </div>
+                <div class="mdl-card__supporting-text">
+                <p>Email:{{guest.email}}</p>
+                <p>Age:{{guest.age}}</p>
+                <p>Room:{{guest.room}}</p>
+                <p>Adults:{{guest.adult}}</p>
+                <p>Children:{{guest.children}}</p>
+                <p>Check-in:{{guest.checkin}}</p>
+                <p>Check-out:{{guest.checkout}}</p>
+                </div>
+                <div class="mdl-card__actions">
+                  <button (click)="deleteGuests(guest.id)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                    Delete
+                  </button>
+                  <button (click)="editGuests(guest.id)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                    Edit
+                  </button>
+                </div>
+            </div>
+            <br>
+        </div>   
+    </div>
+
+    <div *ngIf="PresentTab === 1" class="tabs addguests"></div>
+    <div class="container">
+        <h3>Add Guests</h3>
+        <div [hidden]="submitted">
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Code</label>
+                <input type="text" class="form-control" id="code" name="Code" [(ngModel)]="guest.Code">
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="guest_name" [(ngModel)]="guest.guest_name">
+            </div>
+            <div class="form-group">
+                <label for="name">Phone No</label>
+                <input type="text" class="form-control" id="phone_no" name="phone_no" [(ngModel)]="guest.phone_no">
+            </div>
+            <div class="form-group">
+                <label for="name">Age</label>
+                <input type="text" class="form-control" id="age" name="age" [(ngModel)]="guest.age">
+            </div>
+            <div class="form-group">
+                <label for="name">Gender</label>
+                <input type="text" class="form-control" id="gender" name="gender" [(ngModel)]="guest.gender">
+            </div>
+            <div class="form-group">
+                <label for="name">Email</label>
+                <input type="text" class="form-control" id="email" name="email" [(ngModel)]="guest.email">
+            </div>
+            <div class="form-group">
+                <label for="name">Company</label>
+                <input type="text" class="form-control" id="company" name="company" [(ngModel)]="guest.company">
+            </div>
+            <div class="form-group">
+                <label for="name">Address</label>
+                <input type="text" class="form-control" id="address" name="address" [(ngModel)]="guest.address">
+            </div>
+            <div class="form-group">
+                <label for="name">Room</label>
+                <input type="text" class="form-control" id="room" name="room" [(ngModel)]="guest.room">
+            </div>
+            <div class="form-group">
+                <label for="name">Adult</label>
+                <input type="text" class="form-control" id="adult" name="adult" [(ngModel)]="guest.adult">
+            </div>
+            <div class="form-group">
+                <label for="name">Children</label>
+                <input type="text" class="form-control" id="children" name="children" [(ngModel)]="guest.children">
+            </div>
+            <div class="form-group">
+                <label for="name">Check-in</label>
+                <input type="text" class="form-control" id="checkin" name="checkin" [(ngModel)]="guest.checkin">
+            </div>
+            <div class="form-group">
+                <label for="name">Check-out</label>
+                <input type="text" class="form-control" id="checkout" name="checkout" [(ngModel)]="guest.checkout">
+            </div>
+            <button (click)="addGuests" class="btn btn-success">Submit</button>
+        </form>
+        </div>
+    </div>
+
+    
+    
+
+
+
+
+
+<!--<div class="mat-elevation-z8 mt-3 table-responsive">
+
+    <div class="d-flex justify-content-between aling-items-center p-1 search_form">
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Search</mat-label>
+            <input [(ngModel)]="textSearch" (keyup)="search($event)" matInput placeholder="Code,Guest Name,Room">
+            <mat-icon matSuffix *ngIf="!textSearch">search</mat-icon>
+            <button (click)="clearSearch()" mat-icon-button matSuffix *ngIf="textSearch">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button type="button" class="btn btn-primary maginbutton" (click)="onclickSubmitcheck()">
+            Submit Checklist
+        </button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="w-100 table-striped table-hover">
+
+    
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Code</th>
+            <td mat-cell *matCellDef="let guest"> {{guest.code}} </td>
+        </ng-container>
+
+       
+        <ng-container matColumnDef="guest_name">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Guest Name </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.guest_name}} </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="phone_no">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Phone No</th>
+            <td mat-cell *matCellDef="let guest"> {{guest.phone_no}} </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Email </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Age </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.age}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Gender </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.gender}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Company </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.company}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Address </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.address}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="room">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Room </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.room}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="adult">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Adult </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.adult}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="children">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Children </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.children}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="check-in">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Check-in </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.check-in}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="check-out">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Check-out </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.check-out}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentmode">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Payment Mode </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.paymentmode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalamount">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase"> Total Amount </th>
+            <td mat-cell *matCellDef="let guest"> {{guest.totalamount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="admin_check">
+            <th mat-header-cell *matHeaderCellDef class="text-uppercase text-center"> Action </th>
+            <td mat-cell *matCellDef="let guest" class="text-center">
+                <section class="example-section">
+                    <mat-checkbox *ngIf="!guest.admin_check" class="example-margin" (click)="oncheck(guest.code)">
+                    </mat-checkbox>
+                    <mat-checkbox *ngIf="guest.admin_check" class="example-margin" [disabled]="true">
+                    </mat-checkbox>
+                </section>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]=[5,10,15,20] [showFirstLastButtons]='true'>
+    </mat-paginator>
+</div>-->

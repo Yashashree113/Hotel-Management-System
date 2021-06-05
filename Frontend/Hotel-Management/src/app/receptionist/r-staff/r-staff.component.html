@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="options">
+      <a  (click)="changePresentTab(0)">All Staff</a>
+  </div>
+  <div *ngIf="PresentTab === 0" class="tabs staff">
+      <h2>View Staff</h2>
+      <div *ngFor="let staff of allStaff">
+          <div class="mdl-card">
+              <div class="mdl-card__title">
+              <p>Code:{{staff.Code}}</p>
+              <p>Staff Name:{{staff.employeename}}</p>
+              <p>Occupation:{{staff.occupation}}</p>
+              <p>Salary:{{staff.salary}}</p>
+              </div>
+              <div class="mdl-card__supporting-text">
+              <p>Email:{{staff.email}}</p>
+              <p>Age:{{staff.age}}</p>
+              <p>Address:{{staff.address}}</p>
+              </div>
+          </div>
+          <br>
+      </div>   
+  </div>
