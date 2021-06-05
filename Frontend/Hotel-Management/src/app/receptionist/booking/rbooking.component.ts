@@ -19,15 +19,15 @@ export class RBookingComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   ngOnInit() {
-    this.userService.getBooking().subscribe((booking:Booking[])=>{
+    /*this.userService.getBooking().subscribe((booking:Booking[])=>{
       this.booking=booking;
       this.loading=false;
     }, (error:ErrorEvent)=>{
       this.errorMsg= error.error.message;
       this.loading=false;
-    })
+    })*/
   }
-  deleteBooking(id:number){
+  /*deleteBooking(id:number){
     this.userService.deleteBooking(id).pipe(mergeMap(()=>this.userService.getBooking())
     )
     .subscribe((booking:Booking[])=>{
@@ -37,5 +37,5 @@ export class RBookingComponent implements OnInit {
     (error:ErrorEvent)=>{
       this.errorMsg=error.error.message;
     });
-  }
+  }*/
 }
