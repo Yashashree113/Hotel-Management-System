@@ -24,12 +24,12 @@
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/cli": "~7.3.10",
+    "@angular-devkit/build-angular": "~0.1102.13",
+    "@angular/cli": "~11.2.14",
     "@angular/compiler-cli": "~11.2.14",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
+    "codelyzer": "^5.0.1",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.1.0",
