@@ -10,8 +10,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class MRoomComponent implements OnInit {
 
-
-
   PresentTab:any = 0
   PresentRoom:any = 0
   signupForm = new FormGroup({

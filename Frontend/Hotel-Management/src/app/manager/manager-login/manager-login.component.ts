@@ -31,7 +31,7 @@ export class ManagerLoginComponent implements OnInit {
     console.log(this.isLoginFlag)
   }
   openSignUp(){
-    this.isLoginFlag = true;
+    this.isLoginFlag =true;
     this.emailIdMissing = false
     this.emailIdWrong = false
     this.passwordMissing = false
