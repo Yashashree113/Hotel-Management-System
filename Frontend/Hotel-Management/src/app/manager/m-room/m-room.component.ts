@@ -53,8 +53,8 @@ export class MRoomComponent implements OnInit {
               this.allRooms.push({availability: response[0][i].availability,
                 bed_type: response[0][i].bed_type,
                 price: response[0][i].price,
-                room_no: response[0][i].room_no,    
-                room_type: response[0][i].room_type,
+                roomno: response[0][i].roomno,    
+                roomtype: response[0][i].roomtype,
                 updatedOn:response[0][i].updatedOn,
                 id: response[0][i]._id
                });   

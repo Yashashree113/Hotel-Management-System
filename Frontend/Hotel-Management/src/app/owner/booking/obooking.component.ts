@@ -5,8 +5,8 @@ import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.css']
+  templateUrl: './obooking.component.html',
+  styleUrls: ['./obooking.component.css']
 })
 export class OBookingComponent implements OnInit {
 
