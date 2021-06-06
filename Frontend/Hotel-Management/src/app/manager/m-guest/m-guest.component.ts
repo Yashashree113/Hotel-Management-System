@@ -1,11 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { GuestRes } from '../model/guestres.response';
-import { MatSort } from '@angular/material/sort';
-import { MGuestService } from './m-guest.service';
-import { Router } from '@angular/router';
-import { Guest } from '../model/guest.model';
+import { Component, OnInit} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,96 +9,78 @@ import { Guest } from '../model/guest.model';
   styleUrls: ['./m-guest.component.css']
 })
 export class MGuestComponent implements OnInit {
-  guest:Guest=new Guest();
-  submitted=false;
+  PresentTab:any = 0
+  PresentGuest:any = 0
+  signupForm = new FormGroup({
+    sgEmail: new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[a-z]{2,4}$')]),
+    sgPwd: new FormControl('',Validators.required)
+  })
+  loginForm = new FormGroup({
+    loginEmail: new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[a-z]{2,4}$')]),
+    loginPwd: new FormControl('',Validators.required)
+  })
+  guestForm = new FormGroup({
+    code: new FormControl('', Validators.required),
+    guest_name: new FormControl('', Validators.required),
+    age: new FormControl('',Validators.required),
+    gender: new FormControl('',Validators.required),
+    phone_no: new FormControl('', Validators.required),
+    company: new FormControl('',Validators.required),
+    address: new FormControl('',Validators.required),
+    email: new FormControl('',Validators.required),
+    room: new FormControl('',Validators.required),
+    adults: new FormControl('',Validators.required),
+    children: new FormControl('',Validators.required),
+    check_in: new FormControl('',Validators.required),
+    check_out: new FormControl('',Validators.required)
+  })
+  editForm = new FormGroup({
+    address: new FormControl('',Validators.required),
+    phone_no: new FormControl('', Validators.required),
+    email: new FormControl('',Validators.required),
+    room: new FormControl('',Validators.required),
+    adults: new FormControl('',Validators.required),
+    children: new FormControl('',Validators.required),
+    check_in: new FormControl('',Validators.required),
+    check_out: new FormControl('',Validators.required)
+  })
+  allGuests:Array<any>=[];
 
-  //@ViewChild(MatSort, { static: true }) sort: MatSort
-  //@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator
-
-  /*displayedColumns: string[] = ['code', 'guest_name', 'phone_no', 'email','age','gender', 'company','address',
-  'room','adult', 'children','check-in','check-out', 'admin_check'];
-  dataSource = new MatTableDataSource<GuestRes>();
-  guests:GuestRes[];*/
-  /*textSearch: any;
-  checklist: number[] = []
-  indexarray: number = 0
-  add: boolean = true*/
-
-  constructor(private mguestservice: MGuestService, private router:Router) { }
-
-  ngOnInit(): void {
-    /*this.dataSource=
-    this.dataSource.sort = this.sort
-    this.dataSource.paginator = this.paginator
-    this.feedata();*/
-  }
-  onSubmit(){
-    this.submitted=true;
-    this.mguestservice.createGuest(this.guest).subscribe(
-      data=>console.log(data), error=>console.log(error)
-    )
-    this.guest=new Guest();
-    this.router.navigate(['/guest/guest']);  //check if this is correct
-  }
-  /*feedata() {
-    this.userservice.getBooking().subscribe(
-      data => {
-        this.dataSource.data = data
-      }, error => {
-
-      }
-    )
-  }
-
-  search(event: Event) {
-    let fliterValue = '';
-    if (event) {
-      fliterValue = (event.target as HTMLInputElement).value;
-    }
-    console.log(typeof fliterValue);
-    this.dataSource.filter = fliterValue.trim().toLowerCase();
+  constructor(private httpc: HttpClient) { 
+   
   }
 
-  clearSearch() {
-    this.textSearch = '';
-    this.search(null!);
-  }
+  ngOnInit() :void {
 
-  oncheck(id: number) {
-    this.checklist.forEach((Ifchecklist) => {
-      if (Ifchecklist === id) {
-        this.checklist.splice(this.indexarray, 1)
-        console.log(this.indexarray);
-        this.add = false
-      }
-      else {
-        this.indexarray++
-      }
-    })
-    if (this.add == true) {
-      this.checklist.push(id)
-      this.indexarray = 0
-    }
-    else {
-      this.indexarray = 0
-    }
-  }
-
-  onclickSubmitcheck() {
-    if (this.checklist.length !== 0) {
-      this.userservice.putbookingcheck(this.checklist).subscribe(
-        data => {
-          if (data.status == 'success') {
-            alert(data.data)
-            window.location.href = '/admin-booking'
-          }
-          else {
-            alert(`Error 404`)
-          }
+    console.log("hello")
+    let response:any[]=[]
+    this.httpc.get<Object>('http://localhost:5000/guest/guest').subscribe(
+      (res) => {
+            console.log(res)
+            response.push(res)
+           
+            let recs:any[]=response[0]
+            for (let i=0;i<recs.length;i++){
+              this.allGuests.push({
+                Code: response[0][i].Code,
+                guest_name: response[0][i].guest_name,
+                age: response[0][i].age,
+                gender: response[0][i].gender,    
+                phone_no: response[0][i].phone_no,
+                company:response[0][i].company,
+                address:response[0][i].address,
+                email:response[0][i].email,
+                room:response[0][i].room,
+                adult:response[0][i].adult,
+                children:response[0][i].children,
+                check_in:response[0][i].check_in,
+                check_out:response[0][i].check_out,
+                id: response[0][i]._id
+               });   
+            }
+            console.log("hey",response)
         })
-    }
-    else {
-      alert(`Check the Checklist `)
-    }
-  }*/
+
+        
+  }
 }
